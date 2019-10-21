@@ -1,0 +1,79 @@
+﻿<Window x:Class="MoneyLover.Application.Views.EditPassBook"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextElement.FontFamily="Arial"        
+        Background="LightGray"
+        Height="545" Width="320"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="290"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="Green"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="290"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="Green"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+       
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="btnClose" HorizontalAlignment="Right" BorderBrush="LightGray" Background="LightGray" TextElement.Foreground="Black" Width="30" Height="30" Margin="0,0,0,40.4">X</Button>
+        <Grid Grid.Row="0">
+            <TextBlock Text="THAY DOI THONG TIN SO TIET KIEM" Width="230" HorizontalAlignment="Center" VerticalAlignment="Bottom" TextAlignment="Center" FontSize="20" TextWrapping="Wrap"/>
+        </Grid>
+        <Grid Grid.Row="1" Background="White" Margin="10">
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel HorizontalAlignment="Center" Grid.Column="1">
+
+                   
+                    <ComboBox x:Name="cbPassbookId" Foreground="Green" SelectionChanged="cbPassbookId_SelectionChanged"></ComboBox>
+                    <TextBox x:Name="txtBank" Foreground="Green"   />
+                    <TextBox x:Name="txtDeposit" Foreground="Green"  />
+                    <ComboBox x:Name="cbbTerm"  Foreground="Green"  />
+                    <TextBox x:Name="txtInterestRates" Foreground="Green" ></TextBox>
+                    <TextBox x:Name="txtIndefiniteTerm"  Foreground="Green" />
+                    <ComboBox x:Name="cbbDue"  Foreground="Green" />    
+                    <ComboBox x:Name="cbbPayInterest" Foreground="Green" />
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel VerticalAlignment="Bottom">
+                <Button x:Name="btnSave" Height="30" Background="Green" Content="LƯU THAY ĐỔI"  Margin="5"
+                    Foreground="White" TextElement.FontSize="12"
+                        Click="btnSave_Click"/>
+
+                <Button x:Name="btnCancel" Height="30" Background="White" Content="HỦY"  Margin="5"
+                    Foreground="Green" TextElement.FontSize="12"
+                        Click="btnCancel_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
