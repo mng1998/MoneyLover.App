@@ -12,6 +12,7 @@ namespace MoneyLover.Application.Views
     public partial class PassBook : Window
     {
         private User current_user;
+        private PassbookList passbookList;
 
         private PassBookService passBookService;
 
@@ -70,32 +71,27 @@ namespace MoneyLover.Application.Views
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                int BankID = Convert.ToInt32(cbbBank.SelectedValue);
-                int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)cbbTerm.SelectedItem).Key);
-                int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)cbbPayInterest.SelectedItem).Key);
-                int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)cbbDue.SelectedItem).Key);
-                Models.Bank Bank = Models.Bank.GetBank(BankID);
+            int BankID = Convert.ToInt32(cbbBank.SelectedValue);
+            int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)cbbTerm.SelectedItem).Key);
+            int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)cbbPayInterest.SelectedItem).Key);
+            int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)cbbDue.SelectedItem).Key);
+            Models.Bank Bank = Models.Bank.GetBank(BankID);
 
-                if (IsDateBeforeOrToday(dpDate.Text) && ValidateDeposit(current_user.UserID, Convert.ToDouble(txtDeposit.Text)))
-                {
-                    Models.PassBook pb = passBookService.Create(BankID,
-                                     Convert.ToDouble(txtDeposit.Text),
-                                     dueKey,
-                                     GetIndefiniteTerm(txtIndefiniteTerm.Text),
-                                     TermKey,
-                                     payInterestKey,
-                                     DateTime.Parse(dpDate.Text),
-                                     current_user.UserID,
-                                     Convert.ToDouble(txtInterestRates.Text));
-                    Close();
-                }
-            }
-            catch
+            if (IsDateBeforeOrToday(dpDate.Text))
             {
-                MessageBox.Show("Đã có lỗi xảy ra, vui lòng kiểm tra lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Models.PassBook pb = passBookService.Create(BankID,
+                                 Convert.ToDouble(txtDeposit.Text),
+                                 dueKey,
+                                 GetIndefiniteTerm(txtIndefiniteTerm.Text),
+                                 TermKey,
+                                 payInterestKey,
+                                 DateTime.Parse(dpDate.Text),
+                                 current_user.UserID,
+                                 Convert.ToDouble(txtInterestRates.Text));
+                Close();
+                
             }
+            
         }
 
         #region validate

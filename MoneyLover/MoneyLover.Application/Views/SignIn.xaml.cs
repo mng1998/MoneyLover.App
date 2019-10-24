@@ -23,7 +23,7 @@ namespace MoneyLover.Application.Views
     public partial class SignIn : Window
     {
         private MoneyLoverDB db = new MoneyLoverDB();
-        private PassbookList passBookList;
+        private SignIn signIn;
         public SignIn()
         {
             InitializeComponent();
@@ -44,7 +44,7 @@ namespace MoneyLover.Application.Views
                 passBookList.Show();
             }
             else
-                MessageBox.Show("Email hoặc Mật khẩu không chính xác!");
+                signIn.ShowDialog();
         }
 
         public bool Login(string email, string password)

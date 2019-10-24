@@ -29,6 +29,7 @@ namespace MoneyLover.Application.Views
             InitializeComponent();
             using (var db = new MoneyLoverDB())
             {
+                AllPassbook.Items.Refresh();
                 AllPassbook.ItemsSource = db.PassBooks.ToList().Where(x => x.Settlement == false).ToList();
                 dtgridWithdrawal.ItemsSource = db.PassBooks.Where(x => x.Settlement == true).ToList();
                 //Combobox User
@@ -89,6 +90,17 @@ namespace MoneyLover.Application.Views
         private void btnViewPassBook_Click(object sender, RoutedEventArgs e)
         {
            
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new MoneyLoverDB())
+            {
+                AllPassbook.Items.Refresh();
+                AllPassbook.ItemsSource = db.PassBooks.ToList().Where(x => x.Settlement == false).ToList();
+                dtgridWithdrawal.ItemsSource = db.PassBooks.Where(x => x.Settlement == true).ToList();
+
+            }
         }
     }
 }

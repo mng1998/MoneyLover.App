@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MoneyLover.Application.DB;
+using MoneyLover.Application.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +21,40 @@ namespace MoneyLover.Application.Views
     /// </summary>
     public partial class Register : Window
     {
+        private MoneyLoverDB db = new MoneyLoverDB();
+        private SignIn signIn;
+        private Register register;
         public Register()
         {
             InitializeComponent();
         }
-      
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            if (Register_(txtEmail.Text, psdPassword.Password))
+            {
+                MessageBox.Show("Đăng kí thành công!", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                signIn = new SignIn();
+                signIn.ShowDialog();
+            }
+            else
+                MessageBox.Show("Đã tồn tại emaial này. Vui lòng nhập lại!", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        public bool Register_(string email, string password)
+        {
+           
+            User checkUser = db.Users.Where(m => m.Email == email).SingleOrDefault();
+            if (checkUser == null)
+            {
+                db.Users.Add(new User { Email = email, Password = password, Wallet = 100000000, SavingsWallet = 0 });
+                db.SaveChanges();
+                return true;
+            }
+            else
+                return false;
+           
+        }
     }
 }

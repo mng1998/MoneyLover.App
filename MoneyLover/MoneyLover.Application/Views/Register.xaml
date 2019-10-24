@@ -62,7 +62,7 @@
 
             <Button x:Name="btnRegister" Grid.Row ="5" Height="35" 
                     Width="320" Content="ĐĂNG KÝ" Background="Green" 
-                    TextElement.Foreground="White" TextElement.FontSize="10" TextElement.FontWeight="Bold">
+                    TextElement.Foreground="White" TextElement.FontSize="10" TextElement.FontWeight="Bold" Click="btnRegister_Click">
             </Button>
            
 
